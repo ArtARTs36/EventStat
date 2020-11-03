@@ -63,7 +63,7 @@ class Event extends Model
 
     public static function storeBySlug(User $user, string $slug, Model $entity = null): self
     {
-        return static::store($user, Type::findOrCreate($slug), $entity);
+        return static::store($user, Type::findOrStore($slug), $entity);
     }
 
     public function entity(): MorphTo

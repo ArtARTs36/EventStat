@@ -28,9 +28,9 @@ class Type extends Model
         return static::query()->where(static::FIELD_SLUG, $slug)->firstOrFail();
     }
 
-    public static function findOrCreate(string $slug): ?self
+    public static function findOrStore(string $slug, string $title = null): ?self
     {
-        $type = static::query()->where(static::FIELD_SLUG, $slug)->first();
+        $type = static::query()->where(static::FIELD_SLUG, $title ?? $slug)->first();
 
         return $type ?? self::store($slug, $slug);
     }
