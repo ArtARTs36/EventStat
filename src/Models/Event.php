@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property int $id
+ * @property int $user_id
  * @property string $entity_type
- * @property int $entity_type_id
+ * @property int $entity_id
  * @property int $type_id
+ * @property \DateTimeInterface $created_at
  */
 class Event extends Model
 {
