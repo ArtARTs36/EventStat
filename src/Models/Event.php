@@ -17,6 +17,13 @@ class Event extends Model
 
     protected $table = 'stat_events';
 
+    protected $fillable = [
+        self::FIELD_USER_ID,
+        self::FIELD_ENTITY_TYPE,
+        self::FIELD_ENTITY_TYPE_ID,
+        self::FIELD_TYPE_ID,
+    ];
+
     protected $dates = [
         self::CREATED_AT,
     ];
