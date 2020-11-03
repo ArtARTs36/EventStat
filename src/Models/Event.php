@@ -13,8 +13,6 @@ class Event extends Model
     public const FIELD_ENTITY_TYPE_ID = 'entity_type_id';
     public const FIELD_TYPE_ID = 'type_id';
 
-    public $timestamps = false;
-
     protected $table = 'stat_events';
 
     protected $fillable = [
@@ -22,10 +20,6 @@ class Event extends Model
         self::FIELD_ENTITY_TYPE,
         self::FIELD_ENTITY_TYPE_ID,
         self::FIELD_TYPE_ID,
-    ];
-
-    protected $dates = [
-        self::CREATED_AT,
     ];
 
     public static function create(User $user, Model $entity, Type $type): self

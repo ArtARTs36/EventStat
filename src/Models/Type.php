@@ -14,6 +14,8 @@ class Type extends Model
     public const FIELD_TITLE = 'title';
     public const FIELD_SLUG = 'slug';
 
+    public $timestamps = false;
+
     protected $table = 'stat_event_types';
 
     protected $fillable = [

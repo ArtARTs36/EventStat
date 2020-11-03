@@ -23,7 +23,7 @@ class ServicesCatalogCreateStatEventsTable extends Migration
 
             $table->unsignedBigInteger('type_id');
 
-            $table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 
