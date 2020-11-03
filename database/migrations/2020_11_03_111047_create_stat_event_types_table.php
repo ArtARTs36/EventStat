@@ -18,8 +18,6 @@ class CreateStatEventTypesTable extends Migration
 
             $table->string('title');
             $table->string('slug');
-
-            $table->timestamps();
         });
     }
 

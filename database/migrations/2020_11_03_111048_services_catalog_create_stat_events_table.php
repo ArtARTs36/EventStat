@@ -16,12 +16,14 @@ class ServicesCatalogCreateStatEventsTable extends Migration
         Schema::create('stat_events', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('entity_type');
-            $table->unsignedBigInteger('entity_type_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->string('entity_type')->nullable();
+            $table->unsignedBigInteger('entity_id')->nullable();
 
             $table->unsignedBigInteger('type_id');
 
-            $table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 
