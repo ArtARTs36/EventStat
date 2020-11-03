@@ -19,7 +19,7 @@ class ServicesCatalogCreateStatEventsTable extends Migration
             $table->unsignedBigInteger('user_id');
 
             $table->string('entity_type');
-            $table->unsignedBigInteger('entity_type_id');
+            $table->unsignedBigInteger('entity_id');
 
             $table->unsignedBigInteger('type_id');
 

@@ -16,7 +16,7 @@ class Event extends Model
 {
     public const FIELD_USER_ID = 'user_id';
     public const FIELD_ENTITY_TYPE = 'entity_type';
-    public const FIELD_ENTITY_TYPE_ID = 'entity_type_id';
+    public const FIELD_ENTITY_ID = 'entity_id';
     public const FIELD_TYPE_ID = 'type_id';
 
     protected $table = 'stat_events';
@@ -24,7 +24,7 @@ class Event extends Model
     protected $fillable = [
         self::FIELD_USER_ID,
         self::FIELD_ENTITY_TYPE,
-        self::FIELD_ENTITY_TYPE_ID,
+        self::FIELD_ENTITY_ID,
         self::FIELD_TYPE_ID,
     ];
 
@@ -33,7 +33,7 @@ class Event extends Model
         return static::query()->create([
             static::FIELD_USER_ID => $user->id,
             static::FIELD_ENTITY_TYPE => get_class($entity),
-            static::FIELD_ENTITY_TYPE_ID => $entity->id,
+            static::FIELD_ENTITY_ID => $entity->id,
             static::FIELD_TYPE_ID => $type->id,
         ]);
     }
@@ -43,7 +43,7 @@ class Event extends Model
         return static::query()
             ->where(static::FIELD_USER_ID, $user->id)
             ->where(static::FIELD_ENTITY_TYPE, get_class($entity))
-            ->where(static::FIELD_ENTITY_TYPE_ID, $entity->id)
+            ->where(static::FIELD_ENTITY_ID, $entity->id)
             ->where(static::FIELD_TYPE_ID, $type->id)
             ->exists();
     }
