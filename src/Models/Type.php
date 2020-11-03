@@ -21,8 +21,21 @@ class Type extends Model
         self::FIELD_SLUG,
     ];
 
-    public static function findBySlug(string $slug): ?Type
+    public static function findBySlug(string $slug): ?self
     {
         return static::query()->where(static::FIELD_SLUG, $slug)->firstOrFail();
+    }
+
+    public static function findOrCreate(string $slug): ?self
+    {
+        return static::findBySlug($slug) ?? self::create($slug, $slug);
+    }
+
+    public static function create(string $title, string $slug): self
+    {
+        return static::query()->create([
+            static::FIELD_TITLE => $title,
+            static::FIELD_SLUG => $slug,
+        ]);
     }
 }

@@ -21,7 +21,7 @@ class Event extends Model
         self::CREATED_AT,
     ];
 
-    public static function create(User $user, Model $entity, Type $type): Event
+    public static function create(User $user, Model $entity, Type $type): self
     {
         return static::query()->create([
             static::FIELD_USER_ID => $user->id,
@@ -44,6 +44,11 @@ class Event extends Model
     public static function isPerformedBySlug(User $user, Model $entity, string $slug): bool
     {
         return static::isPerformed($user, $entity, Type::findBySlug($slug));
+    }
+
+    public static function createBySlug(User $user, Model $entity, string $slug): self
+    {
+        return static::create($user, $entity, Type::findBySlug($slug));
     }
 
     public function entity(): MorphTo
