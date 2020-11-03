@@ -32,10 +32,10 @@ class Type extends Model
     {
         $type = static::query()->where(static::FIELD_SLUG, $slug)->first();
 
-        return $type ?? self::create($slug, $slug);
+        return $type ?? self::store($slug, $slug);
     }
 
-    public static function create(string $title, string $slug): self
+    public static function store(string $title, string $slug): self
     {
         return static::query()->create([
             static::FIELD_TITLE => $title,

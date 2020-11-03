@@ -61,7 +61,7 @@ class Event extends Model
         return static::isPerformed($user, Type::findBySlug($slug), $entity);
     }
 
-    public static function storeBySlug(User $user, string $slug, Model $entity): self
+    public static function storeBySlug(User $user, string $slug, Model $entity = null): self
     {
         return static::store($user, Type::findOrCreate($slug), $entity);
     }
