@@ -6,6 +6,12 @@ use Illuminate\Contracts\Auth\Authenticatable as User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+/**
+ * @property int $id
+ * @property string $entity_type
+ * @property int $entity_type_id
+ * @property int $type_id
+ */
 class Event extends Model
 {
     public const FIELD_USER_ID = 'user_id';
@@ -55,5 +61,10 @@ class Event extends Model
     public function entity(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function column(string $column): string
+    {
+        return $this->table . '.' . $column;
     }
 }
