@@ -24,6 +24,10 @@ class Event extends Model
 
     protected $table = 'stat_events';
 
+    protected $hidden = [
+        self::FIELD_ENTITY_TYPE,
+    ];
+
     protected $fillable = [
         self::FIELD_USER_ID,
         self::FIELD_ENTITY_TYPE,
