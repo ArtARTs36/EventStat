@@ -2,12 +2,14 @@
 
 namespace ArtARTs36\EventStat\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
  * @property string $title
  * @property string $slug
+ * @method static Builder slug(string $slug)
  */
 class Type extends Model
 {
@@ -25,14 +27,12 @@ class Type extends Model
 
     public static function findBySlug(string $slug): ?self
     {
-        return static::query()->where(static::FIELD_SLUG, $slug)->first();
+        return static::slug($slug)->first();
     }
 
     public static function findOrStore(string $slug, string $title = null): ?self
     {
-        $type = static::query()->where(static::FIELD_SLUG, $title ?? $slug)->first();
-
-        return $type ?? self::store($slug, $slug);
+        return static::findBySlug($title ?? $slug) ?? static::store($slug, $slug);
     }
 
     public static function store(string $title, string $slug): self
@@ -41,5 +41,17 @@ class Type extends Model
             static::FIELD_TITLE => $title,
             static::FIELD_SLUG => $slug,
         ]);
+    }
+
+    /**
+     * @param Builder $query
+     * @param string $slug
+     * @return Builder
+     */
+    public function scopeSlug($query, string $slug)
+    {
+        return $query
+            ->where(static::FIELD_SLUG, $slug)
+            ->orderByDesc('id');
     }
 }
