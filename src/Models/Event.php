@@ -48,7 +48,7 @@ class Event extends Model
 
     public static function createBySlug(User $user, Model $entity, string $slug): self
     {
-        return static::create($user, $entity, Type::findBySlug($slug));
+        return static::create($user, $entity, Type::findOrCreate($slug));
     }
 
     public function entity(): MorphTo

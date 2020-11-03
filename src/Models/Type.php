@@ -28,7 +28,9 @@ class Type extends Model
 
     public static function findOrCreate(string $slug): ?self
     {
-        return static::findBySlug($slug) ?? self::create($slug, $slug);
+        $type = static::query()->where(static::FIELD_SLUG, $slug)->first();
+
+        return $type ?? self::create($slug, $slug);
     }
 
     public static function create(string $title, string $slug): self
