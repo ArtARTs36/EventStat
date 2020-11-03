@@ -3,6 +3,7 @@
 namespace ArtARTs36\EventStat\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable as User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
@@ -40,13 +41,16 @@ class Event extends Model
         ]);
     }
 
-    public static function isPerformed(User $user, Model $entity, Type $type): bool
+    public static function isPerformed(User $user, Type $type, Model $entity = null): bool
     {
         return static::query()
             ->where(static::FIELD_USER_ID, $user->id)
-            ->where(static::FIELD_ENTITY_TYPE, get_class($entity))
-            ->where(static::FIELD_ENTITY_ID, $entity->id)
             ->where(static::FIELD_TYPE_ID, $type->id)
+            ->when(null !== $entity, function (Builder $query) use ($entity) {
+                $query
+                    ->where(static::FIELD_ENTITY_TYPE, get_class($entity))
+                    ->where(static::FIELD_ENTITY_ID, $entity->id);
+            })
             ->exists();
     }
 
