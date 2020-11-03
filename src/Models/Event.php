@@ -54,9 +54,9 @@ class Event extends Model
             ->exists();
     }
 
-    public static function isPerformedBySlug(User $user, Model $entity, string $slug): bool
+    public static function isPerformedBySlug(User $user, string $slug, Model $entity = null): bool
     {
-        return static::isPerformed($user, $entity, Type::findBySlug($slug));
+        return static::isPerformed($user, Type::findBySlug($slug), $entity);
     }
 
     public static function createBySlug(User $user, Model $entity, string $slug): self
