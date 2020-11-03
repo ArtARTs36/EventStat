@@ -31,14 +31,16 @@ class Event extends Model
         self::FIELD_TYPE_ID,
     ];
 
-    public static function create(User $user, Model $entity, Type $type): self
+    public static function store(User $user, Type $type, Model $entity = null): self
     {
-        return static::query()->create([
+        return static::query()->create(array_merge([
             static::FIELD_USER_ID => $user->id,
+            static::FIELD_TYPE_ID => $type->id,
+        ], $entity ? [
             static::FIELD_ENTITY_TYPE => get_class($entity),
             static::FIELD_ENTITY_ID => $entity->id,
-            static::FIELD_TYPE_ID => $type->id,
-        ]);
+                ] : [])
+        );
     }
 
     public static function isPerformed(User $user, Type $type, Model $entity = null): bool
@@ -59,9 +61,9 @@ class Event extends Model
         return static::isPerformed($user, Type::findBySlug($slug), $entity);
     }
 
-    public static function createBySlug(User $user, Model $entity, string $slug): self
+    public static function storeBySlug(User $user, string $slug, Model $entity): self
     {
-        return static::create($user, $entity, Type::findOrCreate($slug));
+        return static::store($user, Type::findOrCreate($slug), $entity);
     }
 
     public function entity(): MorphTo
