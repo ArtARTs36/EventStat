@@ -25,7 +25,7 @@ class Type extends Model
 
     public static function findBySlug(string $slug): ?self
     {
-        return static::query()->where(static::FIELD_SLUG, $slug)->firstOrFail();
+        return static::query()->where(static::FIELD_SLUG, $slug)->first();
     }
 
     public static function findOrStore(string $slug, string $title = null): ?self

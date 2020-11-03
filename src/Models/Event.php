@@ -58,6 +58,12 @@ class Event extends Model
 
     public static function isPerformedBySlug(User $user, string $slug, Model $entity = null): bool
     {
+        $type = Type::findBySlug($slug);
+
+        if (! $type) {
+            return false;
+        }
+
         return static::isPerformed($user, Type::findBySlug($slug), $entity);
     }
 
